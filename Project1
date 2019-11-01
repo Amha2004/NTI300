@@ -25,7 +25,7 @@ you perform a command in order for it to work from python.
              '&& django-admin --version ' + \
              '&& django-admin startproject project1')
     os.system('adduser -M django')
-    0s.system('usermod -L django')
+    os.system('usermod -L django')
     os.system(chown -R django /opt.django')
              
 def django_start():
