@@ -19,7 +19,7 @@ then
 else
 
      echo "--> ${1} is installed
-     installed=$(systemctl status $1 | grep Active | awk '{print $2}')
+     installed=$(systemctl installed  $1 | grep Active | awk '{print $2}')
      inactive='inactive'
      
            if [[ $installed == $inactive ]]
@@ -27,10 +27,10 @@ else
                read -p "--> would you like to start ${1}? [y/n] " yn
                      case $yn in
                               [Yy]* ) systemctl start $1;;
-                              [Nn]* ) echo "Exiting activation program.";
-                              exit 0;;
+                              [Nn]* ) echo "Exiting activation program."; exit 0;;
+                              * ) echo "--> please answer yes or no.";; #fix    
                      esac
-               echo "--> ${1} is now $installed}."
+               echo "--> ${1} is now ${installed}."
          else
                echo "--> ${1} is ${installed}."
                
