@@ -1,35 +1,39 @@
 #!/bin/bash
-if [ -z "$1"] ; then
-   echo "EDITOR  Enter an  argument"
+if [ -z $1] 
+then
+   echo "specify the programm or service you would like to instll"
    exit 0;
 fi
-installed=$(yum list installed  $1 | grep $1 | awk -F. '{print $1}')
-input="$1"
-status=$(systemctl status $1 | grep Active | awk ' {print $2}')
-inactive="inactive"
-if [ $installed == $input ]; then
-   echo "This package is installed"
-   if [ $status == $inactive ]; then
-        echo "Nooooo it is turned off"
-        echo "Do you wish to start $1? 1 for yes, 2 for no:"
-        select yn in "yes", "no"; do
-        case $yn in
-             yes  ) sysetmctl start $input; break;;
-             no  ) exit 0;;
-        esac
-  done
+installed=$(rpm -q $1 | grep Installed | awk  '{print $2}')
+status=$(rpm -q $1 | grep $1| awk ' {print $2}')
+if [[ $installed == $input ]] 
+then
+      echo "--> ${1} is not installed."
+      read -p "--> would you like to install ${1}? [y/n] " yn
+            case $yn in
+                     [Yy]* ) yum -y install $1;;
+                     [Nn]* ) echo "### Exiting installation program."; 
+                     exit 0;;
+                     * ) echo "--> please answer yse or no.";; #fix
+            esac
 else
-    echo "My status is $status"
-fi
-else
-   echo "you have not installed this packages "
-echo "Do you wish to installed $input? 1 for yes, 2 for no;"
-   select yn in "yes" "no"; do
-                  case $yn in
- 
-                  yes ) yum install -y $input; break;;
-                   no  ) exit 0;;
-      
-              esac
-       done
-fi
+
+     echo "--> ${1} is installed
+     installed=$(systemctl status $1 | grep Active | awk '{print $2}')
+     inactive='inactive'
+     
+           if [[ $installed == $inactive ]]
+           then
+               read -p "--> would you like to start ${1}? [y/n] " yn
+                     case $yn in
+                              [Yy]* ) systemctl start $1;;
+                              [Nn]* ) echo "Exiting activation program.";
+                              exit 0;;
+                     esac
+               echo "--> ${1} is now $installed}."
+         else
+               echo "--> ${1} is ${installed}."
+               
+        fi
+        
+   
