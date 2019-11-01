@@ -18,7 +18,7 @@ then
             esac
 else
 
-     echo "--> ${1} is installed
+     echo "--> ${1} is installed"
      installed=$(systemctl installed  $1 | grep Active | awk '{print $2}')
      inactive='inactive'
      
