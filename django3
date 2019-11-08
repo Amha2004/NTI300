@@ -11,7 +11,7 @@ credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'v1', credentials=credentials)
 project = 'gothic-calling-254202'
 zone = 'us-central1-a'
-name = 'x'
+name = 'test4'
 def list_instances(compute, project, zone):
 	result = compute.instances().list(project=project, zone=zone).execute()
 	return result['items']
