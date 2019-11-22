@@ -16,7 +16,7 @@ def list_instances(compute, project, zone):
 	result = compute.instances().list(project=project, zone=zone).execute()
 	return result['items']
 def create_instance(compute, project, zone, name):
-	startup_script = open('startup-script.sh', 'r').read()
+	startup_script = open('repo.py', 'r').read()
 	image_response = compute.images().getFromFamily(
 		project='centos-cloud', family='centos-7').execute()
 	source_disk_image = image_response['selfLink']
