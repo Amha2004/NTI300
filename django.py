@@ -9,7 +9,7 @@ import pprint
 import json
 credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'v1', credentials=credentials)
-project = 'gothic-calling-254202'
+project = 'centering-aegis-254104'
 zone = 'us-central1-a'
 name = 'A'
 def list_instances(compute, project, zone):
