@@ -5,8 +5,8 @@ import pprint
 import json
 credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'v1', credentials=credentials)
-project = "aerobic-kit-217802"
-zone = "us-east1-b"
+project = "Nti-300-2019"
+zone = "us-central1-a"
 #what kind of machine is being requested and what should it's name be?
 #based on the machine type, we can derrive a name
 name = "testing"
